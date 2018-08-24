@@ -9,29 +9,23 @@ import android.support.annotation.NonNull;
 public class Contact {
     @PrimaryKey
     @NonNull
-    @ColumnInfo(name = "id")
-    public int id;
+    @ColumnInfo(name = "number")
+    public String number;
 
     @ColumnInfo(name = "name")
     @NonNull
     public String name;
 
-    @ColumnInfo(name = "number")
-    @NonNull
-    public String number;
-
     @ColumnInfo(name = "email")
     @NonNull
     public String email;
 
-    @NonNull
-    public int getId() {
-        return id;
+    public Contact(@NonNull String name, @NonNull String number, @NonNull String email) {
+        this.name = name;
+        this.number = number;
+        this.email = email;
     }
 
-    public void setId(@NonNull int id) {
-        this.id = id;
-    }
 
     @NonNull
     public String getName() {
