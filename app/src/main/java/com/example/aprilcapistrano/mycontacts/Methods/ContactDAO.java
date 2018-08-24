@@ -1,5 +1,6 @@
 package com.example.aprilcapistrano.mycontacts.Methods;
 
+import android.arch.lifecycle.LiveData;
 import android.arch.persistence.room.Dao;
 import android.arch.persistence.room.Insert;
 import android.arch.persistence.room.Query;
@@ -18,5 +19,5 @@ public interface ContactDAO {
     List<Contacts> getAllContacts();
 
     @Query("SELECT name from contacts_table ORDER BY name ASC")
-    List<String> getAllNames();
+    LiveData<List<String>> getAllNames();
 }
