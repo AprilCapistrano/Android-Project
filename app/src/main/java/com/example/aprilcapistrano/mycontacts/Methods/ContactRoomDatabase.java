@@ -5,19 +5,19 @@ import android.arch.persistence.room.Room;
 import android.arch.persistence.room.RoomDatabase;
 import android.content.Context;
 
-@Database(entities = {Contacts.class}, version = 1)
-public abstract class ContactsRoomDatabase extends RoomDatabase {
+@Database(entities = {Contact.class}, version = 1)
+public abstract class ContactRoomDatabase extends RoomDatabase {
     public abstract ContactDAO contactDAO();
 
-    private static ContactsRoomDatabase INSTANCE;
+    private static ContactRoomDatabase INSTANCE;
 
-    public static ContactsRoomDatabase getDatabase(final Context context){
+    public static ContactRoomDatabase getDatabase(final Context context){
         if(INSTANCE == null){
-            synchronized (ContactsRoomDatabase.class){
+            synchronized (ContactRoomDatabase.class){
                 if(INSTANCE == null){
                     //CREATE DATABASE
                     INSTANCE = Room.databaseBuilder(context.getApplicationContext(),
-                            ContactsRoomDatabase.class, "contacts_database")
+                            ContactRoomDatabase.class, "contacts_database")
                             .build();
                 }
             }

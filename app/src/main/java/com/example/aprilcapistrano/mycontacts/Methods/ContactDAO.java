@@ -10,14 +10,14 @@ import java.util.List;
 @Dao
 public interface ContactDAO {
     @Insert
-    void insert(Contacts contacts);
+    void insert(Contact contact);
 
-    @Query("DELETE FROM contacts_table")
+    @Query("DELETE FROM contact_table")
     void deleteAll();
 
-    @Query("SELECT * from contacts_table ORDER BY contacts ASC")
-    List<Contacts> getAllContacts();
+    @Query("SELECT * from contact_table ORDER BY contact ASC")
+    LiveData<List<Contact>> getAllContacts();
 
-    @Query("SELECT name from contacts_table ORDER BY name ASC")
+    @Query("SELECT name from contact_table ORDER BY name ASC")
     LiveData<List<String>> getAllNames();
 }
