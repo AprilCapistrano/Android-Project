@@ -53,6 +53,7 @@ public abstract class ContactRoomDatabase extends RoomDatabase {
             //for Adding
             Contact contact = new Contact("FirstName LastName", "0909 123 1234", "fname@gmail.com");
             mDao.insert(contact);
+            contact = new Contact("A-san", "09373892762", "a-san@gmail.com");
             return null;
         }
     }

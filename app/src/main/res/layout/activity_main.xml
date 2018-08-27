@@ -13,4 +13,14 @@
         android:background="@android:color/darker_gray"
         tools:listitem="@layout/recyclerview_item" />
 
+    <Button
+        android:id="@+id/add_contact"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        android:text="Add Contact"
+        android:textColor="@color/buttonLabel" />
+
+
+
 </android.support.constraint.ConstraintLayout>

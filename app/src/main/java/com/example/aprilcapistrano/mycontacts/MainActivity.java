@@ -11,6 +11,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.aprilcapistrano.mycontacts.Methods.Contact;
@@ -19,6 +22,8 @@ import com.example.aprilcapistrano.mycontacts.Methods.ContactViewModel;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
+
+    EditText eName, eNumber, eEmail;
 
     private ContactViewModel mContactViewModel;
     public static final int NEW_NAME_ACTIVITY_REQUEST_CODE = 1;
@@ -33,26 +38,47 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         mContactViewModel = ViewModelProviders.of(this).get(ContactViewModel.class);
+//        mContactViewModel.getAllNames().observe(this, new Observer<List<String>>() {
+//            @Override
+//            public void onChanged(@Nullable List<String> strings) {
+//                adapter.setName(strings);
+//            }
+//        });
+
         mContactViewModel.getAllNames().observe(this, new Observer<List<String>>() {
             @Override
             public void onChanged(@Nullable List<String> strings) {
                 adapter.setName(strings);
             }
         });
+
+        final Button button = (Button) findViewById(R.id.add_contact);
+        button.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View v) {
+
+                startActivity(new Intent(getApplicationContext(), NewContact.class));
+            }
+        });
+
     }
 
-//    public void onActivityResult(int requestCode, int resultCode, Intent data){
-//        super.onActivityResult(requestCode, resultCode, data);
+    public void onActivityResult(int requestCode, int resultCode, Intent data){
+        super.onActivityResult(requestCode, resultCode, data);
 //
-//        if (requestCode == NEW_NAME_ACTIVITY_REQUEST_CODE && resultCode == RESULT_OK) {
-//            Contact contact = new Contact(data.getStringExtra(NewContactActivity.EXTRA_REPLY));
-//            mContactViewModel.insert(contact);
-//        } else {
-//            Toast.makeText(
-//                    getApplicationContext(),
-//                    R.string.empty_not_saved,
-//                    Toast.LENGTH_LONG).show();
-//        }
-//    }
+        if (requestCode == NEW_NAME_ACTIVITY_REQUEST_CODE && resultCode == RESULT_OK) {
+            Contact contact = new Contact(data.getStringExtra(NewContact.EXTRA_REPLY), data.getStringExtra(NewContact.EXTRA_REPLY), data.getStringExtra(NewContact.EXTRA_REPLY));
+
+            mContactViewModel.insert(contact);
+        } else {
+            Toast.makeText(
+                    getApplicationContext(),
+                    R.string.empty_not_saved,
+                    Toast.LENGTH_LONG).show();
+        }
+    }
+
+
 
 }
