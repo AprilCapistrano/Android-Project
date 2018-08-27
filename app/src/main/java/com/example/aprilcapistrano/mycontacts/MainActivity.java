@@ -23,9 +23,7 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-    EditText eName, eNumber, eEmail;
-
-    private ContactViewModel mContactViewModel;
+     private ContactViewModel mContactViewModel;
     public static final int NEW_NAME_ACTIVITY_REQUEST_CODE = 1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,12 +36,6 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         mContactViewModel = ViewModelProviders.of(this).get(ContactViewModel.class);
-//        mContactViewModel.getAllNames().observe(this, new Observer<List<String>>() {
-//            @Override
-//            public void onChanged(@Nullable List<String> strings) {
-//                adapter.setName(strings);
-//            }
-//        });
 
         mContactViewModel.getAllNames().observe(this, new Observer<List<String>>() {
             @Override
@@ -57,8 +49,9 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
-
-                startActivity(new Intent(getApplicationContext(), NewContact.class));
+//                startActivity(new Intent(getApplicationContext(), NewContact.class));
+                Intent intent = new Intent(MainActivity.this, NewContact.class);
+                startActivityForResult(intent, NEW_NAME_ACTIVITY_REQUEST_CODE);
             }
         });
 
@@ -69,8 +62,8 @@ public class MainActivity extends AppCompatActivity {
 //
         if (requestCode == NEW_NAME_ACTIVITY_REQUEST_CODE && resultCode == RESULT_OK) {
             Contact contact = new Contact(data.getStringExtra(NewContact.EXTRA_REPLY), data.getStringExtra(NewContact.EXTRA_REPLY), data.getStringExtra(NewContact.EXTRA_REPLY));
-
             mContactViewModel.insert(contact);
+            Toast.makeText(MainActivity.this, "New contact is successfully added", Toast.LENGTH_LONG).show();
         } else {
             Toast.makeText(
                     getApplicationContext(),

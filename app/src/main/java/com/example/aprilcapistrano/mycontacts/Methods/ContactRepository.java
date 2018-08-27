@@ -1,8 +1,10 @@
 package com.example.aprilcapistrano.mycontacts.Methods;
 
+import android.annotation.SuppressLint;
 import android.app.Application;
 import android.arch.lifecycle.LiveData;
 import android.os.AsyncTask;
+import android.util.Log;
 
 import java.util.List;
 
@@ -21,15 +23,15 @@ public class ContactRepository {
 
     }
 
-    LiveData<List<Contact>> getAllContacts(){
+    LiveData<List<Contact>> getAllContacts() {
         return mAllContacts;
     }
 
-    LiveData<List<String>> getAllNames(){
+    LiveData<List<String>> getAllNames() {
         return mAllNames;
     }
 
-    public void insert (Contact contact){
+    public void insert(Contact contact) {
         new insertAsyncTask(mContactDAO).execute();
     }
 
@@ -41,9 +43,14 @@ public class ContactRepository {
             mAsyncTaskDao = dao;
         }
 
+        @SuppressLint("WrongConstant")
         @Override
         protected Void doInBackground(final Contact... params) {
-            mAsyncTaskDao.insert(params[0]);
+            try {
+                mAsyncTaskDao.insert(params[0]);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
             return null;
         }
     }
