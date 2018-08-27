@@ -24,6 +24,7 @@ public class ContactListAdapter extends RecyclerView.Adapter<ContactListAdapter.
 
     private final LayoutInflater mInflater;
     private List<Contact> contact; // Cached copy of words
+    private List<String> name;
 
     ContactListAdapter(Context context) { mInflater = LayoutInflater.from(context); }
 
@@ -46,6 +47,11 @@ public class ContactListAdapter extends RecyclerView.Adapter<ContactListAdapter.
 
     void setContact(List<Contact> c){
         contact = c;
+        notifyDataSetChanged();
+    }
+
+    void setName(List<String> name){
+        this.name = name;
         notifyDataSetChanged();
     }
 
