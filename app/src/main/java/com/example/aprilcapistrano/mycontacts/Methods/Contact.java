@@ -29,7 +29,7 @@ public class Contact {
 
     @NonNull
     public String getName() {
-        return name;
+        return this.name;
     }
 
     public void setName(@NonNull String name) {
@@ -38,7 +38,7 @@ public class Contact {
 
     @NonNull
     public String getNumber() {
-        return number;
+        return this.number;
     }
 
     public void setNumber(@NonNull String number) {
@@ -47,7 +47,7 @@ public class Contact {
 
     @NonNull
     public String getEmail() {
-        return email;
+        return this.email;
     }
 
     public void setEmail(@NonNull String email) {

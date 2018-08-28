@@ -19,7 +19,7 @@ public class ContactViewModel extends AndroidViewModel {
         mAllNames = contactRepository.getAllNames();
     }
 
-    LiveData<List<Contact>> getAllContacts(){return mAllContacts;}
+    public LiveData<List<Contact>> getAllContacts(){return mAllContacts;}
     public LiveData<List<String>> getAllNames(){return mAllNames; }
 
     public void insert(Contact contact){contactRepository.insert(contact);}

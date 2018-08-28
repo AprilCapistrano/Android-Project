@@ -13,6 +13,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -38,15 +39,15 @@ public class MainActivity extends AppCompatActivity {
 
         mContactViewModel = ViewModelProviders.of(this).get(ContactViewModel.class);
 
-        mContactViewModel.getAllNames().observe(this, new Observer<List<String>>() {
+        mContactViewModel.getAllContacts().observe(this, new Observer<List<Contact>>() {
             @Override
-            public void onChanged(@Nullable List<String> strings) {
-                adapter.setName(strings);
+            public void onChanged(@Nullable List<Contact> contact) {
+                adapter.setContact(contact);
             }
         });
 
         final Button button = (Button) findViewById(R.id.add_contact);
-        button.setOnClickListener(new View.OnClickListener(){
+        button.setOnClickListener(new OnClickListener(){
 
             @Override
             public void onClick(View v) {

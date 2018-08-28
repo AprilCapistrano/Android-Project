@@ -7,6 +7,7 @@ import android.arch.persistence.room.RoomDatabase;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.support.annotation.NonNull;
+import android.util.Log;
 
 @Database(entities = {Contact.class}, version = 1)
 public abstract class ContactRoomDatabase extends RoomDatabase {
@@ -15,6 +16,7 @@ public abstract class ContactRoomDatabase extends RoomDatabase {
     private static ContactRoomDatabase INSTANCE;
 
     public static ContactRoomDatabase getDatabase(final Context context){
+        Log.d("INSTANCE", String.valueOf(INSTANCE));
         if(INSTANCE == null){
             synchronized (ContactRoomDatabase.class){
                 if(INSTANCE == null){
@@ -32,6 +34,7 @@ public abstract class ContactRoomDatabase extends RoomDatabase {
     private static RoomDatabase.Callback sRoomDatabaseCallback = new RoomDatabase.Callback(){
         @Override
         public void onOpen (@NonNull SupportSQLiteDatabase db){
+            Log.d("DB", String.valueOf(db));
             super.onOpen(db);
             new PopulateDbAsync(INSTANCE).execute();
         }
@@ -48,9 +51,10 @@ public abstract class ContactRoomDatabase extends RoomDatabase {
         @Override
         protected Void doInBackground(final Void... params) {
             //for delete
-            mDao.deleteAll();
+//            mDao.deleteAll();
 
             //for Adding
+
             Contact contact = new Contact("FirstName LastName", "0909 123 1234", "fname@gmail.com");
             mDao.insert(contact);
             contact = new Contact("A-san", "09373892762", "a-san@gmail.com");

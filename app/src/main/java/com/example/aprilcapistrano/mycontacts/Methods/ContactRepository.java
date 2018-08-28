@@ -3,6 +3,7 @@ package com.example.aprilcapistrano.mycontacts.Methods;
 import android.annotation.SuppressLint;
 import android.app.Application;
 import android.arch.lifecycle.LiveData;
+import android.arch.persistence.room.Room;
 import android.os.AsyncTask;
 import android.util.Log;
 
@@ -43,7 +44,7 @@ public class ContactRepository {
             mAsyncTaskDao = dao;
         }
 
-        @SuppressLint("WrongConstant")
+                @SuppressLint("WrongConstant")
         @Override
         protected Void doInBackground(final Contact... params) {
             try {
