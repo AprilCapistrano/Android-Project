@@ -37,7 +37,7 @@ public class ContactListAdapter extends RecyclerView.Adapter<ContactListAdapter.
 
     @Override
     public ContactViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        itemView = mInflater.inflate(R.layout.recyclerview_item, (ctx = parent), false);
+        itemView = mInflater.from(ctx = parent.getContext()).inflate(R.layout.recyclerview_item, parent, false);
         return new ContactViewHolder(itemView);
     }
 
@@ -56,7 +56,7 @@ public class ContactListAdapter extends RecyclerView.Adapter<ContactListAdapter.
                     bundle.putString("number", current.getNumber());
                     bundle.putString("email", current.getEmail());
                     cdf.setArguments(bundle);
-                    fx.getSupportFragmentManager().beginTransaction().replace(R.id.content_main, cdf).commit();
+                    fx.getSupportFragmentManager().beginTransaction().replace(R.id.content_main, cdf).addToBackStack("list").commit();
 
                 }
             });
